@@ -73,3 +73,26 @@ func TestDoesNotContain(t *testing.T) {
 		t.Errorf("set does not contain all added elements")
 	}
 }
+
+func TestAddMultiple(t *testing.T) {
+	s := set.New()
+	s.Add(1, 2, 3, 5)
+	ok := s.Contains(4)
+	if ok {
+		t.Errorf("found absent element")
+	}
+	length := len(s)
+	if length != 4 {
+		t.Errorf("set does not contain all added elements")
+	}
+
+}
+
+func TestPrint(t *testing.T) {
+	s := set.New()
+	s.Add(1, 2, 3)
+	expected := "{1, 2, 3}"
+	if s.String() != expected {
+		t.Errorf("not the expected string: %v vs %v", expected, s.String())
+	}
+}
