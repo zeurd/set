@@ -2,14 +2,20 @@ package set
 
 import (
 	"fmt"
+	"math/rand"
 )
 
 //Set is a set
 type Set map[interface{}]interface{}
 
-//New creates a string set
+//New creates a set
 func New() Set {
 	return make(Set)
+}
+
+// Size returns the size of the set
+func (s Set) Size() int {
+	return len(s)
 }
 
 //Add adds an element to the set and returns true if at least one element has been added
@@ -31,6 +37,30 @@ func (s Set) Contains(e interface{}) bool {
 	_, ok := s[e]
 	return ok
 }
+
+// Delete delete the given element from the set if present and returns true if element is absent after.
+func (s Set) Delete(e interface{}) bool {
+	delete(s, e)
+	if _, ok := s[e]; !ok {
+		return !ok
+	}
+}
+
+// Pop returns and deletes a random element
+func (s Set) Pop() interface{} {
+	for k := range s {
+		delete(s, k)
+		return k
+	}
+}
+
+// Peek returns a random element from the set
+func (s Set) Peek() interface{} {
+	for k := range s {
+		return k
+	}
+}
+	
 
 func (s Set) String() string {
 	str := "{"
