@@ -2,7 +2,6 @@ package set
 
 import (
 	"fmt"
-	"math/rand"
 )
 
 //Set is a set
@@ -44,6 +43,7 @@ func (s Set) Delete(e interface{}) bool {
 	if _, ok := s[e]; !ok {
 		return !ok
 	}
+	return false
 }
 
 // Pop returns and deletes a random element
@@ -52,6 +52,7 @@ func (s Set) Pop() interface{} {
 		delete(s, k)
 		return k
 	}
+	return nil
 }
 
 // Peek returns a random element from the set
@@ -59,6 +60,7 @@ func (s Set) Peek() interface{} {
 	for k := range s {
 		return k
 	}
+	return nil
 }
 	
 
